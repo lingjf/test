@@ -140,6 +140,19 @@ test_H2PP_NOT()
       int n1 = H2PP_COMPL(0);
       assert(1 == n1);
    }
+
+
+//    Case(H2PP_BOOL)
+   {
+      int n0 = H2PP_BOOL(0);
+      assert(0 == n0);
+
+      int n1 = H2PP_BOOL(1);
+      assert(1 == n1);
+      int n2 = H2PP_BOOL(2);
+      assert(1 == n2);
+   }
+
   return true;
 }
 
@@ -151,16 +164,6 @@ SUITE(macro)
    
 
 
-   Case(H2PP_BOOL)
-   {
-      int n0 = H2PP_BOOL(0);
-      OK(0, n0);
-
-      int n1 = H2PP_BOOL(1);
-      OK(1, n1);
-      int n2 = H2PP_BOOL(2);
-      OK(1, n2);
-   }
 
    Case(H2PP_AND)
    {
