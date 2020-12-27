@@ -24,4 +24,4 @@ jobs:
     - name: build
       run: cmake --build .
     - name: run
-      run: ./a.out
+      run: ./a.out.exe
