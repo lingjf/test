@@ -46,33 +46,42 @@ test_H2PP_HEAD()
   return true;
 }
 
-   bool test_H2PP_TAIL()
-   {
-      int n0[3] = {H2PP_TAIL()};
-      if(0!= n0[0]) return false;
+bool
+test_H2PP_TAIL()
+{
+  int n0[3] = { H2PP_TAIL() };
+  if (0 != n0[0])
+    return false;
 
-      int n[] = {H2PP_TAIL(1, 2, 3)};
-      if(2!= n[0]) return false;
-      if(3!= n[1]) return false;
-      return true;
-   }
+  int n[] = { H2PP_TAIL(1, 2, 3) };
+  if (2 != n[0])
+    return false;
+  if (3 != n[1])
+    return false;
+  return true;
+}
+
+bool
+test_H2PP_LAST()
+{
+  int n0[3] = { H2PP_LAST() };
+  if (0 != n0[0])
+    return false;
+
+  int n1 = H2PP_LAST(1);
+  if (1 != n1)
+    return false;
+  int n3 = H2PP_LAST(1, 2, 3);
+  if (3 != n3)
+    return false;
+  return true;
+}
 
 #if 0
 SUITE(macro)
 {
    
 
-
-   Case(H2PP_LAST)
-   {
-      int n0[3] = {H2PP_LAST()};
-      OK(0, n0[0]);
-
-      int n1 = H2PP_LAST(1);
-      OK(1, n1);
-      int n3 = H2PP_LAST(1, 2, 3);
-      OK(3, n3);
-   }
 
    Case(H2PP_REMOVE_PARENTHESES)
    {
@@ -363,5 +372,6 @@ main()
   assert(test_CAT());
   assert(test_H2PP_HEAD());
   assert(test_H2PP_TAIL());
+  assert(test_H2PP_LAST());
   return 0;
 }
