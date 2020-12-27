@@ -46,20 +46,22 @@ test_H2PP_HEAD()
   return true;
 }
 
+   bool test_H2PP_TAIL()
+   {
+      int n0[3] = {H2PP_TAIL()};
+      if(0!= n0[0]) return false;
+
+      int n[] = {H2PP_TAIL(1, 2, 3)};
+      if(2!= n[0]) return false;
+      if(3!= n[1]) return false;
+      return true;
+   }
+
 #if 0
 SUITE(macro)
 {
    
 
-   Case(H2PP_TAIL)
-   {
-      int n0[3] = {H2PP_TAIL()};
-      OK(0, n0[0]);
-
-      int n[] = {H2PP_TAIL(1, 2, 3)};
-      OK(2, n[0]);
-      OK(3, n[1]);
-   }
 
    Case(H2PP_LAST)
    {
@@ -360,5 +362,6 @@ main()
 {
   assert(test_CAT());
   assert(test_H2PP_HEAD());
+  assert(test_H2PP_TAIL());
   return 0;
 }
