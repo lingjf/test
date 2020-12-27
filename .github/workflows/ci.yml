@@ -14,3 +14,14 @@ jobs:
       run: cmake --build .
     - name: run
       run: ./a.out
+
+  test-x86_64-windows-msvc:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: configure
+      run: cmake .
+    - name: build
+      run: cmake --build .
+    - name: run
+      run: ./a.out
