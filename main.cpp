@@ -86,19 +86,18 @@ test_H2PP_LAST()
       return true;
    }
 
+   bool test_H2PP_REMOVE_PARENTHESES_IF()
+   {
+      int n[] = {H2PP_REMOVE_PARENTHESES_IF((1, 2, 3))};
+      if(1!= n[0]) return false;
+      if(2!= n[1]) return false;
+      if(3!= n[2]) return false;
+      return true;
+   }
+
 #if 0
 SUITE(macro)
 {
-   
-
-
-   Case(H2PP_REMOVE_PARENTHESES_IF)
-   {
-      int n[] = {H2PP_REMOVE_PARENTHESES_IF((1, 2, 3))};
-      OK(1, n[0]);
-      OK(2, n[1]);
-      OK(3, n[2]);
-   }
 
    Case(H2PP_IS_BEGIN_PARENTHESIS)
    {
@@ -375,5 +374,6 @@ main()
   assert(test_H2PP_TAIL());
   assert(test_H2PP_LAST());
   assert(test_H2PP_REMOVE_PARENTHESES());
+  assert(test_H2PP_REMOVE_PARENTHESES_IF());
   return 0;
 }
