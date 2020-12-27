@@ -77,37 +77,53 @@ test_H2PP_LAST()
   return true;
 }
 
-   bool test_H2PP_REMOVE_PARENTHESES()
-   {
-      int n[] = {H2PP_REMOVE_PARENTHESES((1, 2, 3))};
-      if(1!= n[0]) return false;
-      if(2!= n[1]) return false;
-      if(3!= n[2]) return false;
-      return true;
-   }
+bool
+test_H2PP_REMOVE_PARENTHESES()
+{
+  int n[] = { H2PP_REMOVE_PARENTHESES((1, 2, 3)) };
+  if (1 != n[0])
+    return false;
+  if (2 != n[1])
+    return false;
+  if (3 != n[2])
+    return false;
+  return true;
+}
 
-   bool test_H2PP_REMOVE_PARENTHESES_IF()
-   {
-      int n[] = {H2PP_REMOVE_PARENTHESES_IF((1, 2, 3))};
-      if(1!= n[0]) return false;
-      if(2!= n[1]) return false;
-      if(3!= n[2]) return false;
-      return true;
-   }
+bool
+test_H2PP_REMOVE_PARENTHESES_IF()
+{
+  int n[] = { H2PP_REMOVE_PARENTHESES_IF((1, 2, 3)) };
+  if (1 != n[0])
+    return false;
+  if (2 != n[1])
+    return false;
+  if (3 != n[2])
+    return false;
+  return true;
+}
+
+bool
+test_H2PP_IS_BEGIN_PARENTHESIS()
+{
+  if (0 != H2PP_IS_BEGIN_PARENTHESIS())
+    return false;
+  if (0 != H2PP_IS_BEGIN_PARENTHESIS(a))
+    return false;
+  if (1 != H2PP_IS_BEGIN_PARENTHESIS((a)))
+    return false;
+  if (1 != H2PP_IS_BEGIN_PARENTHESIS((a, b)))
+    return false;
+  // if(1 != H2PP_IS_BEGIN_PARENTHESIS((a, b), 1)) return false; // compile
+  // error
+  if (1 != H2PP_IS_BEGIN_PARENTHESIS(()))
+    return false;
+  return true;
+}
 
 #if 0
 SUITE(macro)
 {
-
-   Case(H2PP_IS_BEGIN_PARENTHESIS)
-   {
-      OK(0, H2PP_IS_BEGIN_PARENTHESIS());
-      OK(0, H2PP_IS_BEGIN_PARENTHESIS(a));
-      OK(1, H2PP_IS_BEGIN_PARENTHESIS((a)));
-      OK(1, H2PP_IS_BEGIN_PARENTHESIS((a, b)));
-      // OK(1, H2PP_IS_BEGIN_PARENTHESIS((a, b), 1)); // compile error
-      OK(1, H2PP_IS_BEGIN_PARENTHESIS(()));
-   }
 
    Case(H2PP_NOT)
    {
@@ -375,5 +391,6 @@ main()
   assert(test_H2PP_LAST());
   assert(test_H2PP_REMOVE_PARENTHESES());
   assert(test_H2PP_REMOVE_PARENTHESES_IF());
+  assert(test_H2PP_IS_BEGIN_PARENTHESIS());
   return 0;
 }
