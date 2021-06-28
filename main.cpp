@@ -77,6 +77,6 @@ main(int argc, char* argv[])
  
       typedef const char* (*F1)(A*);
        
-printf("%s\n",  ((F1)&A::f1)(nullptr));
+printf("%s\n",  static_cast<F1>(&A::f1) (nullptr));
   return 0;
 }
