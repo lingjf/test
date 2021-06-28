@@ -9,7 +9,7 @@ public:
   long long a;
   A() {}
   const char* f0() { return "fa0"; }
-  virtual const char* f1() { return "fa1"; }
+  virtual const char* f1() = 0;
   virtual const char* f2() { return "fa2"; }
 };
 
@@ -46,15 +46,15 @@ public:
 int
 main(int argc, char* argv[])
 {
-  A a;
+//   A a;
   B b;
   C c;
   D d;
 //   printf("%s\n", a.f1());
-  printf("&A=%p, &A.a=%p", &a, &a.a);
-  printf(", &A.f0=%p", &A::f0);
-  printf(", &A.f1=%p", &A::f1);
-  printf(", &A.f2=%p\n", &A::f2);
+//   printf("&A=%p, &A.a=%p", &a, &a.a);
+//   printf(", &A.f0=%p", &A::f0);
+//   printf(", &A.f1=%p", &A::f1);
+//   printf(", &A.f2=%p\n", &A::f2);
 
 //   printf("%s\n", b.f1());
   printf("&B=%p, &B.b=%p", &b, &b.b);
@@ -76,17 +76,17 @@ main(int argc, char* argv[])
 
  
     
-      typedef const char* (*F1)(A*);
-typedef  const char *(__cdecl A::* F2)(void);
+      typedef const char* (*F1)(B*);
+typedef  const char *(__cdecl B::* F2)(void);
   union {
     void * a;
     F2 c;
     F1 b;
   }u;
-    u.c=    &A::f1 ;
+    u.c=    &B::f1 ;
   
 //      u.a=   reinterpret_cast<void*>(&A::f1) ;
     
-printf("%s\n", (u.b)(nullptr));
+printf("%s\n", (u.b)(&b));
   return 0;
 }
