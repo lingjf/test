@@ -75,8 +75,14 @@ main(int argc, char* argv[])
   printf(", &D.f2=%p\n", &D::f2);
 
  
+    
       typedef const char* (*F1)(A*);
-       
-printf("%s\n",  static_cast<F1>(&A::f1) (nullptr));
+  
+  union {
+    void * a;
+    F1 b;
+  }u;
+    u.a    static_cast<void*>(&A::f1) ;
+printf("%s\n", u.b(nullptr));
   return 0;
 }
