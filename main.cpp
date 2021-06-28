@@ -1,407 +1,77 @@
-#include "assert.h"
-#include "h2_macro.hpp"
-#include "stdio.h"
-#include "stdlib.h"
-#include "string.h"
 
-bool
-test_CAT()
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+class A
 {
-#define CAT1 1
-#define CAT13 -13
-  int m12 = _H2PP_CAT2(1, 2);
-  if (m12 != 12)
-    return false;
+public:
+  long long a;
+  A() {}
+  const char* f0() { return "fa0"; }
+  virtual const char* f1() { return "fa1"; }
+  virtual const char* f2() { return "fa2"; }
+};
 
-  int m13 = _H2PP_CAT2(CAT1, 3);
-  if (m13 != -13)
-    return false;
-
-  int n12 = H2PP_CAT2(1, 2);
-  if (n12 != 12)
-    return false;
-
-  int n13 = H2PP_CAT2(CAT1, 3);
-  if (n13 != 13)
-    return false;
-
-  return true;
-#undef CAT1
-#undef CAT13
-}
-
-bool
-test_H2PP_HEAD()
+class B: public A
 {
-  //   int n0[3] = { H2PP_HEAD() };
-  //   if (0 != n0[0])
-  //     return false;
+public:
+  long long b;
+  B() {}
+  const char* f0() { return "fb0"; }
+  virtual const char* f1() { return "fb1"; }
+  virtual const char* f2() { return "fb2"; }
+};
 
-  //   int n1 = H2PP_HEAD(1);
-  //   if (1 != n1)
-  //     return false;
-  //   int n3 = H2PP_HEAD(1, 2, 3);
-  //   if (1 != n3)
-  //     return false;
-  return true;
-}
-
-bool
-test_H2PP_TAIL()
+class C: public A
 {
-  //   int n0[3] = { H2PP_TAIL() };
-  //   if (0 != n0[0])
-  //     return false;
+public:
+  long long c;
+  C() {}
+  const char* f0() { return "fc0"; }
+  virtual const char* f1() { return "fc1"; }
+  virtual const char* f2() { return "fc2"; }
+};
 
-  //   int n[] = { H2PP_TAIL(1, 2, 3) };
-  //   if (2 != n[0])
-  //     return false;
-  //   if (3 != n[1])
-  //     return false;
-  return true;
-}
-
-bool
-test_H2PP_LAST()
+class D: public B, public C
 {
-  //   int n0[3] = { H2PP_LAST() };
-  //   if (0 != n0[0])
-  //     return false;
-
-  //   int n1 = H2PP_LAST(1);
-  //   if (1 != n1)
-  //     return false;
-  //   int n3 = H2PP_LAST(1, 2, 3);
-  //   if (3 != n3)
-  //     return false;
-  return true;
-}
-
-bool
-test_H2PP_REMOVE_PARENTHESES()
-{
-  int n[] = { H2PP_REMOVE_PARENTHESES((1, 2, 3)) };
-  if (1 != n[0])
-    return false;
-  if (2 != n[1])
-    return false;
-  if (3 != n[2])
-    return false;
-  return true;
-}
-
-bool
-test_H2PP_REMOVE_PARENTHESES_IF()
-{
-  //   int n[] = { H2PP_REMOVE_PARENTHESES_IF((1, 2, 3)) };
-  //   if (1 != n[0])
-  //     return false;
-  //   if (2 != n[1])
-  //     return false;
-  //   if (3 != n[2])
-  //     return false;
-  return true;
-}
-
-bool
-test_H2PP_IS_BEGIN_PARENTHESIS()
-{
-  //   if (0 != H2PP_IS_BEGIN_PARENTHESIS())
-  //     return false;
-  //   if (0 != H2PP_IS_BEGIN_PARENTHESIS(a))
-  //     return false;
-  //   if (1 != H2PP_IS_BEGIN_PARENTHESIS((a)))
-  //     return false;
-  //   if (1 != H2PP_IS_BEGIN_PARENTHESIS((a, b)))
-  //     return false;
-  //   if (1 != H2PP_IS_BEGIN_PARENTHESIS(()))
-  //     return false;
-
-  /* if(1 != H2PP_IS_BEGIN_PARENTHESIS((a, b), 1)) return false; // compile
-    error */
-  return true;
-}
-
-bool
-test_H2PP_NOT()
-{
-  int n0 = H2PP_NOT(0);
-  assert(1 == n0);
-
-  int n1 = H2PP_NOT(1);
-  assert(0 == n1);
-  int n2 = H2PP_NOT(2);
-  assert(0 == n2);
-
-//    Case(H2PP_COMPL)
-   {
-      int n0 = H2PP_COMPL(1);
-      assert(0 == n0);
-      int n1 = H2PP_COMPL(0);
-      assert(1 == n1);
-   }
-
-
-//    Case(H2PP_BOOL)
-   {
-      int n0 = H2PP_BOOL(0);
-      assert(0 == n0);
-
-      int n1 = H2PP_BOOL(1);
-      assert(1 == n1);
-      int n2 = H2PP_BOOL(2);
-      assert(1 == n2);
-   }
-
-  return true;
-}
-
-
-#if 0
-SUITE(macro)
-{
-
-   
-
-
-
-   Case(H2PP_AND)
-   {
-      int n11 = H2PP_AND(1, 1);
-      OK(1, n11);
-      int n10 = H2PP_AND(1, 0);
-      OK(0, n10);
-      int n01 = H2PP_AND(0, 1);
-      OK(0, n01);
-      int n00 = H2PP_AND(0, 0);
-      OK(0, n00);
-
-      int n22 = H2PP_AND(2, 2);
-      OK(1, n22);
-      int n20 = H2PP_AND(2, 0);
-      OK(0, n20);
-   }
-
-   Case(H2PP_OR)
-   {
-      int n11 = H2PP_OR(1, 1);
-      OK(1, n11);
-      int n10 = H2PP_OR(1, 0);
-      OK(1, n10);
-      int n01 = H2PP_OR(0, 1);
-      OK(1, n01);
-      int n00 = H2PP_OR(0, 0);
-      OK(0, n00);
-
-      int n22 = H2PP_OR(2, 2);
-      OK(1, n22);
-      int n20 = H2PP_OR(2, 0);
-      OK(1, n20);
-   }
-
-   Case(H2PP_EQ)
-   {
-      OK(H2PP_EQ(0, 0));
-      OK(H2PP_EQ(1, 1));
-      OK(H2PP_EQ(2, 2));
-   }
-
-   Case(H2PP_TH)
-   {
-      int n0 H2PP_TH9();
-      int n1 H2PP_TH9(0);
-      int n2 H2PP_TH9(0, 1);
-      int n3 H2PP_TH9(0, 1, 2);
-      int n4 H2PP_TH9(0, 1, 2, 3);
-      int n5 H2PP_TH9(0, 1, 2, 3, 4);
-      int n6 H2PP_TH9(0, 1, 2, 3, 4, 5);
-      int n7 H2PP_TH9(0, 1, 2, 3, 4, 5, 6);
-      int n8 H2PP_TH9(0, 1, 2, 3, 4, 5, 6, 7);
-      int n9 H2PP_TH9(0, 1, 2, 3, 4, 5, 6, 7, 8);
-      int n10 = H2PP_TH9(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-      OK(9, n10);
-   }
-
-   Case(H2PP_IF_ELSE)
-   {
-#define X7_TRUE "Yes"
-#define X7_FALSE "No"
-
-      const char* yes = H2PP_IF_ELSE(1, X7_TRUE, X7_FALSE);
-      OK("Yes", yes);
-      const char* no = H2PP_IF_ELSE(0, X7_TRUE, X7_FALSE);
-      OK("No", no);
-
-#undef X7_TRUE
-#undef X7_FALSE
-   }
-
-   Case(H2PP_IF)
-   {
-      int n0[3] = {H2PP_IF(0)(10)};
-      OK(0, n0[0]);
-      int n1[3] = {H2PP_IF(1)(11)};
-      OK(11, n1[0]);
-      int n2[3] = {H2PP_IF(13)(12)};
-      OK(12, n2[0]);
-   }
-
-   Case(H2PP_IS_EMPTY)
-   {
-      int n0 = H2PP_IS_EMPTY();
-      int n1 = H2PP_IS_EMPTY(a);
-      int n2 = H2PP_IS_EMPTY(a, b);
-      int n3 = H2PP_IS_EMPTY(a, b, c);
-
-      OK(1, n0);
-      OK(0, n1);
-      OK(0, n2);
-      OK(0, n3);
-   }
-
-   Case(H2PP_VARIADIC_CALL)
-   {
-#define M0() 0
-#define M1(_1) _1
-#define M2(_1, _2) _1 + _2
-#define M3(_1, _2, _3) _1 + _2 + _3
-
-      int n0 = H2PP_VARIADIC_CALL(M);
-      OK(0, n0);
-
-      int n1 = H2PP_VARIADIC_CALL(M, 1);
-      OK(1, n1);
-
-      int n2 = H2PP_VARIADIC_CALL(M, 1, 2);
-      OK(1 + 2, n2);
-
-      int n3 = H2PP_VARIADIC_CALL(M, 1, 2, 3);
-      OK(1 + 2 + 3, n3);
-
-#undef M0
-#undef M1
-#undef M2
-#undef M3
-   }
-
-   Case(H2PP_NARG)
-   {
-      int n0 = H2PP_NARG();
-      int n1a = H2PP_NARG(a);
-      int n1b = H2PP_NARG((a));
-      int n1c = H2PP_NARG((a, b));
-      int n1d = H2PP_NARG((a, b, c));
-      int n2a = H2PP_NARG(a, b);
-      int n2b = H2PP_NARG((a, b), c);
-      int n3 = H2PP_NARG(a, b, c);
-
-      OK(0, n0);
-      OK(1, n1a);
-      OK(1, n1b);
-      OK(1, n1c);
-      OK(1, n1d);
-      OK(2, n2a);
-      OK(2, n2b);
-      OK(3, n3);
-   }
-
-   Case(H2PP_REPEAT)
-   {
-#define M0(Dummy, i) int n##i = i;
-      H2PP_REPEAT((), M0, , 0);
-#undef M0
-      int n0, n1, n2, n3;
-
-#define Ma(Dummy, i) n##i = 100 + i
-      H2PP_REPEAT((), Ma, , 1);
-      OK(100, n0);
-#undef Ma
-
-#define Mb(a, i) n##i = 200 + i + a
-      H2PP_REPEAT((), Mb, 0, 1);
-      OK(200, n0);
-#undef Mb
-
-#define Mc(Dummy, i) n##i = 300 + i
-      H2PP_REPEAT((, ), Mc, , 2);
-      OK(300, n0);
-      OK(301, n1);
-#undef Mc
-   }
-
-   Case(H2PP_FOREACH)
-   {
-      int sa = 0;
-#define Fora(Dummy, i, x) sa += x * i;
-      H2PP_FOREACH(, Fora, (), 1, 2, 3)
-#undef Fora
-      OK(1 * 0 + 2 * 1 + 3 * 2, sa);
-
-      int sb = 0;
-#define Forb(Dummy, i, x) sb += x * i;
-      H2PP_FOREACH((), Forb, (), 1, 2, 3)
-#undef Forb
-      OK(1 * 0 + 2 * 1 + 3 * 2, sb);
-
-      int sc = 0;
-#define Forc(Dummy, i, x) sc += x * i
-      H2PP_FOREACH((;), Forc, (), 1, 2, 3);
-#undef Forc
-      OK(1 * 0 + 2 * 1 + 3 * 2, sc);
-   }
-
-   Case(H2PP_FULLMESH)
-   {
-      int e = 1 * 1 * 0 * 0 +
-              1 * 2 * 0 * 1 +
-              1 * 3 * 0 * 2 +
-              2 * 1 * 1 * 0 +
-              2 * 2 * 1 * 1 +
-              2 * 3 * 1 * 2 +
-              3 * 1 * 2 * 0 +
-              3 * 2 * 2 * 1 +
-              3 * 3 * 2 * 2;
-
-      int sa = 0;
-#define Fma(Dummy, i, j, x, y) sa += x * y * i * j;
-      H2PP_FULLMESH(, Fma, (), 1, 2, 3);
-#undef Fma
-      OK(e, sa);
-
-      int sb = 0;
-#define Fmb(Dummy, i, j, x, y) sb += x * y * i * j;
-      H2PP_FULLMESH((), Fmb, (), 1, 2, 3);
-#undef Fmb
-      OK(e, sb);
-
-      int sc = 0;
-#define Fmc(Dummy, i, j, x, y) sc += x * y * i * j
-      H2PP_FULLMESH((;), Fmc, (), 1, 2, 3);
-#undef Fmc
-      OK(e, sc);
-   }
-}
-
-CASE(generate unique symbol)
-{
-   int H2PP_UNIQUE() = 1;
-   int H2PP_UNIQUE() = 1;
-   int H2PP_UNIQUE(prefix) = 1;
-   int H2PP_UNIQUE(prefix) = 1;
-}
-
-#endif
+public:
+  long long d;
+  D() {}
+  const char* f0() { return "fd0"; }
+  virtual const char* f1() { return "fd1"; }
+  virtual const char* f2() { return "fd2"; }
+};
 
 int
-main()
+main(int argc, char* argv[])
 {
-  assert(test_CAT());
-  assert(test_H2PP_NOT());
-  assert(test_H2PP_HEAD());
-  assert(test_H2PP_TAIL());
-  assert(test_H2PP_LAST());
-  assert(test_H2PP_REMOVE_PARENTHESES());
-  assert(test_H2PP_REMOVE_PARENTHESES_IF());
-  assert(test_H2PP_IS_BEGIN_PARENTHESIS());
+  A a;
+  B b;
+  C c;
+  D d;
+//   printf("%s\n", a.f1());
+  printf("&A=%p, &A.a=%p", &a, &a.a);
+  printf(", &A.f0=%p", &A::f0);
+  printf(", &A.f1=%d", &A::f1);
+  printf(", &A.f2=%d\n", &A::f2);
+
+//   printf("%s\n", b.f1());
+  printf("&B=%p, &B.b=%p", &b, &b.b);
+  printf(", &B.f0=%p", &B::f0);
+  printf(", &B.f1=%d", &B::f1);
+  printf(", &B.f2=%d\n", &B::f2);
+
+//   printf("%s\n", c.f1());
+  printf("&C=%p, &C.c=%p", &c, &c.c);
+  printf(", &C.f0=%p", &C::f0);
+  printf(", &C.f1=%d", &C::f1);
+  printf(", &C.f2=%d\n", &C::f2);
+
+//   printf("%s\n", d.f1());
+  printf("&D=%p, &D.d=%p", &d, &d.d);
+  printf(", &D.f0=%p", &D::f0);
+  printf(", &D.f1=%d", &D::f1);
+  printf(", &D.f2=%d\n", &D::f2);
   return 0;
 }
