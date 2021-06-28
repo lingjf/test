@@ -83,7 +83,10 @@ typedef  const char *(__cdecl A::* F2)(void);
     F2 c;
     F1 b;
   }u;
-    u.c=   static_cast<void*>(&A::f1) ;
+    u.c=    &A::f1 ;
+  
+     u.a=   reinterpret_cast<void*>(&A::f1) ;
+    
 printf("%s\n", u.b(nullptr));
   return 0;
 }
