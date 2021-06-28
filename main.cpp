@@ -77,12 +77,13 @@ main(int argc, char* argv[])
  
     
       typedef const char* (*F1)(A*);
-  
+typedef  const char *(__cdecl A::* F2)(void);
   union {
     void * a;
+    F2 c;
     F1 b;
   }u;
-    u.a    static_cast<void*>(&A::f1) ;
+    u.c=   static_cast<void*>(&A::f1) ;
 printf("%s\n", u.b(nullptr));
   return 0;
 }
