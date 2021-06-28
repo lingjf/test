@@ -73,5 +73,10 @@ main(int argc, char* argv[])
   printf(", &D.f0=%p", &D::f0);
   printf(", &D.f1=%p", &D::f1);
   printf(", &D.f2=%p\n", &D::f2);
+
+ 
+      typedef const char* (*F1)(A*);
+       
+printf("%s\n",  ((F1)&A::f1)(nullptr));
   return 0;
 }
