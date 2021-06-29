@@ -8,6 +8,7 @@
 #pragma comment(lib, "Dbghelp.lib")
 
    HANDLE hProcess;
+void *frames[100];
 
 void get1(void* addr)
 {
@@ -31,7 +32,7 @@ public:
   virtual const char* f2() { CaptureStackBackTrace(0, sizeof(frames) / sizeof(frames[0]), frames, NULL); get1(frames[0]); return "fa2"; }
 };
 
-void *frames[100];
+
 class B: public A
 {
 public:
