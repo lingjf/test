@@ -22,6 +22,30 @@ void get1(void* addr)
     
 }
 
+
+template <typename Class, typename ReturnType, typename... Args>
+struct h2_mfp<Class, ReturnType(Args...)> {
+
+   static void* A(ReturnType (*f)(Args...))
+   {
+      return (void*)f;
+   }
+
+   union U {
+      ReturnType (Class::*f)(Args...);
+      void* p;
+      long long v;
+   };
+
+ 
+   static void* A(ReturnType (Class::*f)(Args...))
+   {
+      U u{f};
+      return u.p;
+   }
+ 
+};
+
 class A
 {
 public:
@@ -73,8 +97,8 @@ main(int argc, char* argv[])
   B b;
   C c;
   D d;
-  b.f0();b.f1();b.f2();
-  get1((void*&) &B::f0); get1((void*&) &B::f1); get1((void*&) &B::f2);
+  b.f0();b.f1();b.f2(); // h2_mfp<B,const char*()>(&B::f1)
+  get1((void*) &B::f0); get1(h2_mfp<B,const char*()>(&B::f1) ); get1(h2_mfp<B,const char*()>(&B::f2));
   c.f0();c.f1();c.f2();
   d.f0();d.f1();d.f2();
 //   printf("%s\n", a.f1());
