@@ -74,6 +74,7 @@ main(int argc, char* argv[])
   C c;
   D d;
   b.f0();b.f1();b.f2();
+  get1((void*&) &B::f0); get1((void*&) &B::f1); get1((void*&) &B::f2);
   c.f0();c.f1();c.f2();
   d.f0();d.f1();d.f2();
 //   printf("%s\n", a.f1());
