@@ -132,12 +132,20 @@ class Color {
    virtual int print(int x, int y) { return 10; }
 };
 
-class Six : public Rect, public Color {
+// class Six : public Rect, public Color {
+//  public:
+//    Six(int _1, int _2, int _3, int _4, int _5, int _6) : Rect(0, 0) {}
+//    virtual int work(int x, int y) { return 6; }
+//    virtual int print(int x, int y) { return 20; }
+// };
+
+class Six   {
  public:
-   Six(int _1, int _2, int _3, int _4, int _5, int _6) : Rect(0, 0) {}
+   Six(int _1, int _2, int _3, int _4, int _5, int _6)   {}
    virtual int work(int x, int y) { return 6; }
    virtual int print(int x, int y) { return 20; }
 };
+
 
 int
 main(int argc, char* argv[])
