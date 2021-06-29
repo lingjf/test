@@ -18,7 +18,7 @@ void get1(void* addr)
    symbol->MaxNameLen = 256;
    if (!SymFromAddr(hProcess, (DWORD64)(addr), 0, symbol))
       return ;
-  ::printf("%s %p %lld \n", symbol->Address, (long long)addr-(long long)symbol->Address);
+  ::printf("%s %p %lld \n",symbol->Name, symbol->Address, (long long)addr-(long long)symbol->Address);
     
 }
 
