@@ -152,12 +152,12 @@ main(int argc, char* argv[])
    
       Six six(1, 2, 3, 4, 5, 6);
    
-     void* p4 = h2::h2_mfp<Six, int(int, int)>::A(&Six::work);
+     void* p4 =  h2_mfp<Six, int(int, int)>::A(&Six::work);
       get1(p4);
 //       typedef int (*Six_Work)(Six*, int, int);
 //       OK(6, ((Six_Work)p4)(&six, 1, 1));
 
-      void* p5 = h2::h2_mfp<Six, int(int, int)>::A(&Six::print);
+      void* p5 = h2_mfp<Six, int(int, int)>::A(&Six::print);
 //       OK(NotNull, p5);
 //       typedef int (*Six_Print)(Six*, int, int);
 //       OK(20, ((Six_Print)p5)(&six, 1, 1));
