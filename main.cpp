@@ -87,7 +87,7 @@ typedef  const char *(__cdecl B::* F2)(void);
   
 //      u.a=   reinterpret_cast<void*>(&A::f1) ;
     
-printf("%s\n", (u.b)(&b));
+printf("%p %s\n", &(b.f1), (u.b)(&b));
   u.c=    &B::f2 ;
   printf("%s\n", (u.b)(&b));
   return 0;
