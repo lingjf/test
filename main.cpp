@@ -25,7 +25,8 @@ void get1(void* addr)
    }
    
   ::printf("%s %p %lld %p %x\n",symbol->Name, symbol->Address, (long long)addr-(long long)symbol->Address, offset, *(unsigned char*)symbol->Address);
-    
+    if (*(unsigned char*)symbol->Address==0xe9)
+       get1(offset);
 }
 
 template <typename Class, typename Signature>
