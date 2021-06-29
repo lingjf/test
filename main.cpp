@@ -139,9 +139,9 @@ class Color {
 //    virtual int print(int x, int y) { return 20; }
 // };
 
-class Six  : public Shape, public Rect {
+class Six  : public Shape, public Color {
  public:
-   Six(int _1, int _2, int _3, int _4, int _5, int _6) :Rect(_1,_2)  {}
+   Six(int _1, int _2, int _3, int _4, int _5, int _6)    {}
    virtual int work(int x, int y) { return 6; }
    virtual int print(int x, int y) { return 20; }
 };
