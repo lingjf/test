@@ -156,12 +156,13 @@ main(int argc, char* argv[])
       get1(p4);
 //       typedef int (*Six_Work)(Six*, int, int);
 //       OK(6, ((Six_Work)p4)(&six, 1, 1));
-
+::printf("%d\n", six.work(1,1));
       void* p5 = h2_mfp<Six, int(int, int)>::A(&Six::print);
 //       OK(NotNull, p5);
 //       typedef int (*Six_Print)(Six*, int, int);
 //       OK(20, ((Six_Print)p5)(&six, 1, 1));
    get1(p5);
+   ::printf("%d\n", six.print(1,1));
    
 
   b.f0();b.f1();b.f2(); // h2_mfp<B,const char*()>(&B::f1)
