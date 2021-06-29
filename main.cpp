@@ -24,7 +24,7 @@ void get1(void* addr)
       
    }
    
-  ::printf("%s %p %lld %p \n",symbol->Name, symbol->Address, (long long)addr-(long long)symbol->Address, offset);
+  ::printf("%s %p %lld %p %x\n",symbol->Name, symbol->Address, (long long)addr-(long long)symbol->Address, offset, *(unsigned char*)symbol->Address);
     
 }
 
