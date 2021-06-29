@@ -18,13 +18,13 @@ void get1(void* addr)
    symbol->MaxNameLen = 256;
    if (!SymFromAddr(hProcess, (DWORD64)(addr), 0, symbol))
       return ;
-   unsigned long long offset=0;
+   void* offset=NULL;
    if (memcmp("ILT+", symbol->Name, 4) == 0) {  // ILT (Incremental Link Table), JMP(e9)
-      offset = (unsigned long long)((unsigned char*)symbol->Address + 5 + *(long*)((unsigned char*)symbol->Address + 1));
+      offset = (void*)((unsigned char*)symbol->Address + 5 + *(long*)((unsigned char*)symbol->Address + 1));
       
    }
    
-  ::printf("%s %p %lld %x \n",symbol->Name, symbol->Address, (long long)addr-(long long)symbol->Address, offset);
+  ::printf("%s %p %lld %p \n",symbol->Name, symbol->Address, (long long)addr-(long long)symbol->Address, offset);
     
 }
 
