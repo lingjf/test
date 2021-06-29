@@ -22,7 +22,8 @@ void get1(void* addr)
     
 }
 
-
+template <typename Class, typename Signature>
+struct h2_mfp;
 template <typename Class, typename ReturnType, typename... Args>
 struct h2_mfp<Class, ReturnType(Args...)> {
 
