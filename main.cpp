@@ -95,6 +95,50 @@ public:
   virtual const char* f2() { CaptureStackBackTrace(0, sizeof(frames) / sizeof(frames[0]), frames, NULL); get1(frames[0]); return "fd2"; }
 };
 
+
+class Shape {
+ public:
+   int x, y;
+
+   Shape() : x(0), y(0) {}
+
+ private:
+   static int fly(int x, int y) { return 0; }
+   static int fly(int xy) { return 1; }
+
+   int go(int x, int y) { return 1; }
+   int go(int xy) { return 2; }
+
+   virtual int work(int x, int y) { return 3; }
+   virtual int work(int xy) { return 4; }
+};
+
+class Rect : public Shape {
+ public:
+   Rect(int _x, double _y) {}
+   virtual int work(int x, int y) { return 4; }
+};
+
+class Circle : public Shape {
+ public:
+   Circle(char* _x) {}
+   virtual int work(int x, int y) { return 5; }
+};
+
+class Color {
+ public:
+   int r, g, b;
+   virtual ~Color() {}
+   virtual int print(int x, int y) { return 10; }
+};
+
+class Six : public Rect, public Color {
+ public:
+   Six(int _1, int _2, int _3, int _4, int _5, int _6) : Rect(0, 0) {}
+   virtual int work(int x, int y) { return 6; }
+   virtual int print(int x, int y) { return 20; }
+};
+
 int
 main(int argc, char* argv[])
 {
@@ -105,11 +149,28 @@ main(int argc, char* argv[])
   B b;
   C c;
   D d;
+   
+      Six six(1, 2, 3, 4, 5, 6);
+   
+     void* p4 = h2::h2_mfp<Six, int(int, int)>::A(&Six::work);
+      get1(p4);
+//       typedef int (*Six_Work)(Six*, int, int);
+//       OK(6, ((Six_Work)p4)(&six, 1, 1));
+
+      void* p5 = h2::h2_mfp<Six, int(int, int)>::A(&Six::print);
+//       OK(NotNull, p5);
+//       typedef int (*Six_Print)(Six*, int, int);
+//       OK(20, ((Six_Print)p5)(&six, 1, 1));
+   get1(p5);
+   
+
   b.f0();b.f1();b.f2(); // h2_mfp<B,const char*()>(&B::f1)
   get1(h2_mfp<B,const char*()>::A(&B::f0) ); get1(h2_mfp<B,const char*()>::A(&B::f1) ); get1(h2_mfp<B,const char*()>::A(&B::f2));
   c.f0();c.f1();c.f2();
   d.f0();d.f1();d.f2();
    get1(h2_mfp<D,const char*()>::A(&D::f0) ); get1(h2_mfp<D,const char*()>::A(&D::f1) ); get1(h2_mfp<D,const char*()>::A(&D::f2));
+   
+   
 //   printf("%s\n", a.f1());
 //   printf("&A=%p, &A.a=%p", &a, &a.a);
 //   printf(", &A.f0=%p", &A::f0);
