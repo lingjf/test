@@ -128,7 +128,7 @@ class Circle : public Shape {
 class Color {
  public:
    int r, g, b;
-   virtual ~Color() {}
+     ~Color() {}
    virtual int print(int x, int y) { return 10; }
 };
 
