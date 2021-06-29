@@ -109,6 +109,7 @@ main(int argc, char* argv[])
   get1(h2_mfp<B,const char*()>::A(&B::f0) ); get1(h2_mfp<B,const char*()>::A(&B::f1) ); get1(h2_mfp<B,const char*()>::A(&B::f2));
   c.f0();c.f1();c.f2();
   d.f0();d.f1();d.f2();
+   get1(h2_mfp<D,const char*()>::A(&D::f0) ); get1(h2_mfp<D,const char*()>::A(&D::f1) ); get1(h2_mfp<D,const char*()>::A(&D::f2));
 //   printf("%s\n", a.f1());
 //   printf("&A=%p, &A.a=%p", &a, &a.a);
 //   printf(", &A.f0=%p", &A::f0);
