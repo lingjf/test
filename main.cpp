@@ -139,7 +139,7 @@ class Color {
 //    virtual int print(int x, int y) { return 20; }
 // };
 
-class Six   {
+class Six  : public Shape {
  public:
    Six(int _1, int _2, int _3, int _4, int _5, int _6)   {}
    virtual int work(int x, int y) { return 6; }
